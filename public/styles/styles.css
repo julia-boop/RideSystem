@@ -88,13 +88,18 @@
     margin-top: 21px;
 }
 
-.formContainer form input, label, button{
+.formContainer form input, select{
+    width: 60%;
+    margin-top: 25px;
+    transition: 0.75s ease-in-out;
+}
+
+.formContainer form label, button{
     width: 60%;
     margin-top: 25px;
     letter-spacing: 0.9rem;
     text-transform: uppercase;
     transition: 0.75s ease-in-out;
-
 }
 
 .formContainer button{
@@ -116,4 +121,66 @@
     outline: none;
     box-shadow: 0 0 5px 10px rgba(141, 141, 141, 0.541);
    border-radius: 5px;
+}
+
+/* --------------------------CONCURSOS-------------------------- */
+
+.portadaConcurso img {
+    width: 100%;
+}
+
+.banner{
+    position: absolute;
+    z-index: 2;
+    top: 7%;
+}
+
+.banner h1{
+    margin: 50px;
+    width: 30%;
+    margin-left: 80px;
+    font-size: 45px;
+    padding: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.concursosContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.concursosContainer div{
+    width: 30%;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: whitesmoke;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 5px;
+    transition: 0.5s ease-in-out;
+}
+
+.concursosContainer div:hover{
+    outline: none;
+    box-shadow: 0 0 5px 10px rgba(141, 141, 141, 0.541);
+   border-radius: 5px;
+}
+
+.concursosContainer div img{
+    border-radius: 50%;
+    width: 50%;
+}
+
+.concursosContainer div a {
+    color: black;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+}
+
+.concursosContainer div a:hover, a:focus {
+    text-decoration: underline;
 }
