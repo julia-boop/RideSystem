@@ -540,6 +540,15 @@ svg:focus{
     .btnMenu{
         display: initial;
     }
+
+    .formContainer{
+        margin: 0px;
+        margin-top: 100px;
+    }
+
+    .formContainer form {
+        width: 80%;
+    }
 }
 
 
@@ -562,8 +571,22 @@ svg:focus{
         width: 50%;
     }
 
+    .sidebar ul{
+        padding-left: 20px!important;
+    }
+
     .click{
         right: 50%;
+    }
+
+    .formContainer form label{
+        letter-spacing: 0.5rem;
+        font-size: 13px;
+    }
+
+    .formContainer p {
+        text-align: center;
+        margin: 10px;
     }
 }
 
@@ -585,5 +608,9 @@ svg:focus{
 
     .sidebar li{
         font-size: 17px;
+    }
+
+    .formContainer input, .formContainer label{
+        width: 75%;
     }
 }
