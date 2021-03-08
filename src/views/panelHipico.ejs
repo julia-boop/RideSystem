@@ -4,8 +4,23 @@
     <%- include('./partials/head') %> 
 <body>
     <%- include('./partials/header') %> 
-      <h1 class="pruebaTitle" style="margin-bottom: 40px
-      ;">Panel de Administración para Organizaciones Hipicas</h1>
+    <h1 class="pruebaTitle" style="margin-bottom: 40px
+    ;">Panel de Administración para Organizaciones Hipicas</h1>
+          <h2 style="width: 100%; text-align: center;">Mis Datos</h2>
+    <div class="infoHipico formContainer">
+      <form action="" enctype="multipart/form-data">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="">
+        <label for="logo">Logo</label>
+        <input type="file">
+        <label for="adress">Direccion</label>
+        <input type="text" name="adress">
+        <label for="email">Email</label>
+        <input type="email" name="email">
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </div>
+    
       <div class="onCourseContainer">
         <h2>Concursos en Curso</h2>
         <div class="onCourse">
