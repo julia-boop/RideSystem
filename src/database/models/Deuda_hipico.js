@@ -14,6 +14,9 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.INTEGER(10).UNSIGNED,
         allowNull: false
       },
+      mensual: {
+        type: dataTypes.INTEGER(10)
+      },
       total: {
           type: dataTypes.INTEGER(100),
           allowNull:true

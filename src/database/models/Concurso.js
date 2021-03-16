@@ -24,7 +24,10 @@ module.exports = (sequelize, dataTypes) => {
       total_rec:{
         type: dataTypes.INTEGER(10),
         allowNull: true
-
+      },
+      hipico_id: {
+        type: dataTypes.INTEGER(10).UNSIGNED,
+        allowNull:false
       },
       pagado: {
         type: dataTypes.INTEGER(10).UNSIGNED,

@@ -10,8 +10,8 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.INTEGER(10).UNSIGNED,
         allowNull: false,
       },
-      total: {
-        type: dataTypes.INTEGER(10),
+      concurso_id: {
+        type: dataTypes.INTEGER(10).UNSIGNED,
         allowNull: false
       }
     };
