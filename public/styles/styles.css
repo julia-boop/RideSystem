@@ -21,7 +21,7 @@
 }
 
 .btnMenu {
-    position: fixed;
+    position: absolute;
     z-index: 50;
     top: -2.5%;
     right: 2%;

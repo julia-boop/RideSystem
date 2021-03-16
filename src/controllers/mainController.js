@@ -1,3 +1,5 @@
+const fetch = require('node-fetch')
+
 module.exports = {
     home: function(req, res){
         res.render('home');
@@ -6,3 +8,4 @@ module.exports = {
         res.render('contact')
     }
 }
+    
