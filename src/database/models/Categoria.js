@@ -18,7 +18,7 @@ module.exports = (sequelize, dataTypes) => {
     };
     const Categoria = sequelize.define(alias, cols, config); 
 
-    Categoria.associate(function(models){
+    Categoria.associate = function(models){
 
         Categoria.belongsToMany(models.Prueba, {
             as: 'Categoria',
@@ -28,7 +28,7 @@ module.exports = (sequelize, dataTypes) => {
             timestamps: false
           });
           
-    })
+    }
     
     return Categoria;
   }

@@ -39,7 +39,7 @@ module.exports = (sequelize, dataTypes) => {
     };
     const Inscripcion = sequelize.define(alias, cols, config); 
 
-    Inscripcion.associate(function(models){
+    Inscripcion.associate = function(models){
 
         Inscripcion.belongsTo(models.Usuario, {
             as: 'Usuario',
@@ -56,7 +56,7 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: 'categoria_id'
         })
         
-    })
+    }
     
     return Inscripcion;
   }

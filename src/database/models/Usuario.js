@@ -6,6 +6,10 @@ module.exports = (sequelize, dataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
+      rol:{
+        type: dataTypes.INTEGER(10).UNSIGNED,
+        allowNull:false
+      },
       email: {
         type: dataTypes.STRING(150),
         allowNull: false,
@@ -54,3 +58,5 @@ module.exports = (sequelize, dataTypes) => {
     
     return Usuario;
   }
+
+  

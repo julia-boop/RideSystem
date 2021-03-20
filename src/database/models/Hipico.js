@@ -51,7 +51,7 @@ module.exports = (sequelize, dataTypes) => {
     
     Hipico.associate = function(models) {
       
-      Hipico.belongsToMany(models.Deuda, {
+      Hipico.belongsToMany(models.Deuda_hipico, {
         as: 'Deuda',
         through: 'hipicos_deudas',
         foreignKey: 'hipico_id',

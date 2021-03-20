@@ -8,6 +8,10 @@ module.exports = {
             primaryKey: true,
             autoIncrement: true
           },
+          rol:{
+            type: Sequelize.DataTypes.INTEGER(10).UNSIGNED,
+            allowNull:false
+          },
           email: {
             type: Sequelize.DataTypes.STRING(150),
             allowNull: false,
@@ -28,8 +32,10 @@ module.exports = {
           },
           pais: {
             type: Sequelize.DataTypes.STRING(100)
-          }
-    })
+          },
+          created_at: Sequelize.DataTypes.DATE,
+          updated_at: Sequelize.DataTypes.DATE
+      })
   },
 
   down: async (queryInterface, Sequelize) => {
