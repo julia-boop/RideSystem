@@ -15,7 +15,7 @@ module.exports = {
         .then(function(usuario){
             if(bcrypt.compareSync(req.body.contrasena, usuario.contrasena)){
                 req.session.userSession = usuario.id
-                res.render('home')
+                res.redirect('/')
             }else{
                 res.render('login')
             }
@@ -45,15 +45,47 @@ module.exports = {
         })
     },
     account: function(req, res){
-        res.render('cuenta');
+        db.Usuario.findByPk(req.params.idUser)
+        .then(function(usuario){
+            res.render('cuenta', {usuario});
+        })
+        .catch(function(e){
+            res.send(e)
+        })
     }, 
     accountEdit: function(req, res){
-        res.render('accountEdit');
+        db.Usuario.findByPk(req.params.idUser)
+        .then(function(usuario){
+            res.render('accountEdit', {usuario});
+        })
+        .catch(function(e){
+            res.send(e)
+        })
     },
     update: function(req, res){
-        res.render('accountEdit');
+        db.Usuario.update({
+            email: req.body.email,
+            rol: 1,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            telefono: req.body.telefono,
+        }, {
+            where: {
+                id: req.params.idUser
+            }
+        })
+        .then(function(usuario){
+            res.redirect('/user/' + req.params.idUser + '/account')
+        })
+        .catch(function(e){
+            res.send(e)
+        })
     },
     inscripciones: function(req, res){
         res.render('misInscripciones');
+    },
+    logout: function(req, res){
+        req.session.destroy()
+        res.redirect('/')
     }
 }

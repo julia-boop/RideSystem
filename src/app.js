@@ -7,16 +7,18 @@ const createLocals = require('./middlewares/createLocals');
 const mainRouter = require('./routers/mainRouter');
 const userRouter = require('./routers/userRouter');
 const concursoRouter = require('./routers/concursoRouter');
+const methodOverride = require('method-override')
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 app.set("view engine", "ejs") 
 app.set('views', path.join(__dirname, 'views')); 
 app.use(express.static(path.join(__dirname, '../public'))); 
 app.use(session({secret:'hey'}))
-
-
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
+app.use(methodOverride('_method'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(createLocals);
 
