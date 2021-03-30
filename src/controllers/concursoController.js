@@ -53,8 +53,32 @@ module.exports = {
         return res.render('formInscripcion', {usuario , categoria, paises, prueba, concurso});
     }, 
     pDetail: function(req, res){
-
-        res.render('detallePrueba')
+        db.Inscripcion.findAll({
+            include: [
+                {
+                    association: 'Prueba',
+                    include: [
+                        {association: 'Concurso', 
+                        include: [{association: 'Hipico'}]
+                    }
+                    ],
+                    where: {
+                        id: req.params.idPrueba
+                    }
+                },{
+                    association: 'Usuario'
+                },{
+                    association: 'Categoria'
+                }
+            ]
+        })
+        .then((inscripciones) => {
+            // return res.send(inscripciones)
+            res.render('detallePrueba', {inscripciones})
+        })
+        .catch((e) => {
+            res.send(e)
+        })
     },
     iCreate: async function(req, res){
         let inscripcion = await db.Inscripcion.create({

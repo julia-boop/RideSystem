@@ -38,7 +38,8 @@ module.exports = {
           pais: null 
         })
         .then(function(usuario){
-            res.render('home')
+            req.session.userSession = usuario.id
+            res.redirect('/')
         })
         .catch(function(e){
             res.send(e)
@@ -82,7 +83,34 @@ module.exports = {
         })
     },
     inscripciones: function(req, res){
-        res.render('misInscripciones');
+        console.log(req.session)
+        db.Inscripcion.findAll({
+            include:[{association: 'Usuario', where: {id: req.session.userSession}}, {association: 'Prueba', include: [{association:'Concurso', include: [{association:'Hipico'}]}]}]    
+        })
+        .then((inscripciones) => {
+            let iFilter = []
+            let arrTotalParcial = []
+            let totalParcial = 0 
+            for(let i = 0 ; i < inscripciones.length ; i ++){
+                if(inscripciones[i].estado == 1){
+                    iFilter.push(inscripciones[i])
+                    arrTotalParcial.push(inscripciones[i].Prueba.precio)
+                  
+                }
+            }
+            for(let j = 0 ; j < arrTotalParcial.length ; j ++){
+                totalParcial += arrTotalParcial[j]
+            }
+            console.log(totalParcial)
+            let serviciosCalc = Number((totalParcial/100)*10)
+            let servicios = Number(serviciosCalc.toFixed(0))
+            let total = Number(totalParcial + servicios)
+
+            return res.render('misInscripciones', {iFilter, totalParcial, servicios, total})
+        })
+        .catch((e) => {
+            res.send(e)
+        })
     },
     logout: function(req, res){
         req.session.destroy()

@@ -7,23 +7,22 @@
       ;">Inscripciones a pagar</h1>
       <div class="payContainer">
           <div class="pay">
-            <h2>Nombre del Concurso</h2>
-            <h3>Hipico que lo hospeda</h3>
-            <div class="payCourse">
-                <h4>Numero de Prueba</h4>
-                <h5>Monto:$$$$</h5>
-            </div>
-            <div class="payCourse">
-                <h4>Numero de Prueba</h4>
-                <h5>Monto:$$$$</h5>
-            </div>
-            <div class="payCourse">
-                <h4>Numero de Prueba</h4>
-                <h5>Monto:$$$$</h5>
-            </div>
-            <h4 style="border-top: 1px solid black; margin-top: 20px;">Total:$$$$</h4>
+            <% for(let i = 0 ; i < iFilter.length ; i ++) {%> 
+                <div class="payCourse">
+                    <h4><%= iFilter[i].Prueba.numero %>, <%= iFilter[i].Prueba.altura %>, <%= iFilter[i].Prueba.dia %>   </h4>
+                    <h5>Monto: $<%= iFilter[i].Prueba.precio %></h5>
+                    <h6><%= iFilter[i].apellido.toUpperCase() %>, <%= iFilter[i].nombre.toUpperCase() %> con <%= iFilter[i].caballo.toUpperCase() %>   </h6>
+                    <h6><%= iFilter[i].Prueba.Concurso.nombre %> en el <%= iFilter[i].Prueba.Concurso.Hipico.siglas %>  </h6>
+                </div>
+            <% } %> 
+            
+            <h4 style=" margin-top: 20px;">Total Parcial:$<%= totalParcial %> </h4>
+            <h4 style=" margin-top: 20px;">Servicios 10%:$<%= servicios%> </h4>
+            <h3 style="border-top: 1px solid black; margin-top: 20px;">Total Final:$<%= total %> </h3>
+
             <button><a href="">Pagar</a></button>
           </div>
       </div>
+      
       <%- include('./partials/scripts') %>
       </body>

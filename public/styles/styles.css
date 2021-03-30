@@ -572,6 +572,15 @@ svg:focus{
     color: white;
 }
 
+.payCourse{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    border-bottom: 1px solid grey;
+}
+
 /* --------------------------MEDIA QUERIES-------------------------- */
 
 @media(max-width: 980px){
