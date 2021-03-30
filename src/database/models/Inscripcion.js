@@ -22,6 +22,14 @@ module.exports = (sequelize, dataTypes) => {
           type: dataTypes.STRING(150),
           allowNull: false
     },
+    nombre: {
+        type: dataTypes.STRING(150),
+        allowNull: false
+    },
+    apellido: {
+        type: dataTypes.STRING(150),
+        allowNull: false
+    },
     pais: {
         type: dataTypes.STRING(150),
         allowNull: false
@@ -30,11 +38,15 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.STRING(150),
         allowNull: false
     },
+    estado: {
+        type: dataTypes.INTEGER(10).UNSIGNED,
+        allowNull: false,
+    }
     
     };
     const config = {
       tableName: 'inscripciones',
-      timestamps: false,
+      timestamps: true,
       underscored: true
     };
     const Inscripcion = sequelize.define(alias, cols, config); 

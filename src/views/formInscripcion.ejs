@@ -3,35 +3,31 @@
     <%- include('./partials/head') %> 
 <body>
     <%- include('./partials/header') %> 
-    <h1 class="pruebaTitle">Formulario de Inscripción</h1>
+    <h1 class="pruebaTitle animate__animated animate__fadeInDown animate__slow">Formulario de Inscripción</h1>
       <div class="formContainer">
-          <form action="" enctype="multipart/form-data">
+          <form action="/concurso/<%= concurso.id %>/<%= prueba.id %>/inscripcion" method="POST" >
               <label for="name">Nombre</label>
-              <input type="text" name="name">
+              <input type="text" name="nombre" >
               <label for="surname">Apellido</label>
-              <input type="text" name="surname">
+              <input type="text" name="apellido" >
               <label for="horse">Caballo</label>
-              <input type="text" name="horse">
+              <input type="text" name="caballo">
               <label for="program">Categoria</label>
-                <select name="category" id="">
+                <select name="categoria" id="">
                     <option value=""></option>
-                    <option value="1">2nda</option>
-                    <option value="1">1era</option>
-                    <option value="1">Amateur</option>
+                    <% for (let i = 0 ; i < categoria.length ; i ++) {%> 
+                    <option value="<%= categoria[i].id %>"><%= categoria[i].nombre %> </option>
+                    <% } %> 
                 </select>
               <label for="hipico">Club Hipico</label>
-                <select name="hipico" id="">
-                    <option value=""></option>
-                    <option value="1">CHA</option>
-                    <option value="2">CAE</option>
-                    <option value="3">SJV</option>
-                </select>
+              <p>*Por favor escribir unicamente las siglas</p>
+              <input type="text" name="club" id="">
                 <label for="country">Pais</label>
-                <select name="country" id="">
+                <select name="pais" id="">
                     <option value=""></option>
-                    <option value="1">ARG</option>
-                    <option value="2">BRA</option>
-                    <option value="3">CHI</option>
+                    <% for(let i = 0 ; i < paises.length ; i++) {%> 
+                    <option value="<%= paises[i].siglas %>"><%= paises[i].nombre %> </option>
+                    <% } %> 
                 </select>
                 <p>*Las inscripciones solo se realizan despues de efectuar el pago. Para hacerlo, hace click en "Pagar inscripciones", luego de llenar el formulario</p>
               <button type="submit">Inscribirme</button>

@@ -12,6 +12,10 @@ module.exports = {
             type: Sequelize.DataTypes.STRING(150),
             allowNull: false,
           },
+          siglas: {
+            type: Sequelize.DataTypes.STRING(150),
+            allowNull: false,
+          },
           logo: {
             type: Sequelize.DataTypes.STRING(150),
             allowNull: false
@@ -39,7 +43,13 @@ module.exports = {
         },
           pago_com: {
             type: Sequelize.DataTypes.INTEGER(10).UNSIGNED
-        }
+        },
+          habilitado: {
+            type: Sequelize.DataTypes.INTEGER(10).UNSIGNED
+        },
+        created_at: Sequelize.DataTypes.DATE,
+        updated_at: Sequelize.DataTypes.DATE
+
     })
   },
 

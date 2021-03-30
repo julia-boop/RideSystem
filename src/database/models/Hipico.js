@@ -13,6 +13,10 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.STRING(150),
         allowNull: false,
       },
+      siglas: {
+        type: dataTypes.STRING(150),
+        allowNull: false,
+      },
       logo: {
         type: dataTypes.STRING(150),
         allowNull: false
@@ -40,7 +44,10 @@ module.exports = (sequelize, dataTypes) => {
     },
       pago_com: {
         type: dataTypes.INTEGER(10).UNSIGNED
-    }
+    },
+      habilitado: {
+        type: dataTypes.INTEGER(10).UNSIGNED
+  }
     };
     const config = {
       tableName: 'hipicos',

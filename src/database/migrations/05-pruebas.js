@@ -37,6 +37,9 @@ module.exports = {
           articulo: {
               type: Sequelize.DataTypes.STRING(100)
           },
+          precio: {
+            type: Sequelize.DataTypes.INTEGER(10)
+          },
           anotados: {
               type: Sequelize.DataTypes.INTEGER(100).UNSIGNED
           },
@@ -50,7 +53,9 @@ module.exports = {
                   model:'concursos',
                   key: 'id'
               }
-          }
+          },
+          created_at: Sequelize.DataTypes.DATE,
+          updated_at: Sequelize.DataTypes.DATE
     })
   },
 
