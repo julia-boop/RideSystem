@@ -105,7 +105,7 @@ module.exports = {
             let serviciosCalc = Number((totalParcial/100)*10)
             let servicios = Number(serviciosCalc.toFixed(0))
             let total = Number(totalParcial + servicios)
-
+            // return res.send(iFilter)
             return res.render('misInscripciones', {iFilter, totalParcial, servicios, total})
         })
         .catch((e) => {
@@ -115,5 +115,18 @@ module.exports = {
     logout: function(req, res){
         req.session.destroy()
         res.redirect('/')
+    },
+    iDestroy: function(req, res){
+        db.Inscripcion.destroy({
+            where: {
+                id: req.params.idInscripcion
+            }
+        })
+        .then(function(){
+            res.redirect('/user/' + req.params.idUser + '/inscripciones')
+        })
+        .catch(function(e){
+            res.send(e)
+        })
     }
 }

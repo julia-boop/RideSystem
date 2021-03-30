@@ -3,41 +3,45 @@
     <%- include('./partials/head') %> 
 <body>
     <%- include('./partials/header') %> 
-      <div class="infoConcurso animate__animated animate__zoomIn animate__slow">
-          <h1><%= inscripciones[0].Prueba.Concurso.nombre %> </h1>
-          <h2><%= inscripciones[0].Prueba.Concurso.Hipico.nombre %> </h2>
-          <h3><%= inscripciones[0].Prueba.nombre %> </h3>
-          <h3><%= inscripciones[0].Prueba.dia %> </h3>
-          <h4>Altura: <%= inscripciones[0].Prueba.altura %> </h4>
-          <h4>Definicion: <%= inscripciones[0].Prueba.definicion %> </h4>
-          <h4>Numero: <%= inscripciones[0].Prueba.numero %> </h4>
+      <div class="infoConcurso animate__animated animate__fadeInRight animate__slow">
+          <h1><%= concurso.nombre %> </h1>
+          <h2><%= concurso.Hipico.nombre %> </h2>
+          <h3><%= prueba.nombre %> </h3>
+          <h3><%= prueba.dia %> </h3>
+          <h4>Altura: <%= prueba.altura %> </h4>
+          <h4>Definicion: <%= prueba.definicion %> </h4>
+          <h4>Numero: <%= prueba.numero %> </h4>
       </div>
       <div class="pruebasContainer">
-      <div class="tableContainer">
-          <table>
-            <tr>
-                <th>Numero</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Caballo</th>
-                <th>Categoria</th>
-                <th>Club</th>
-                <th>Pais</th>
-
-            </tr>
-            <% for(let i = 0 ; i < inscripciones.length ; i ++) {%> 
-                <tr>
-                    <td><%= i + 1 %> </td>
-                    <td><%= inscripciones[i].nombre %> </td>
-                    <td><%= inscripciones[i].apellido %> </td>
-                    <td><%= inscripciones[i].caballo %> </td>
-                    <td><%= inscripciones[i].Categoria.nombre %> </td>
-                    <td><%= inscripciones[i].club.toUpperCase() %> </td>
-                    <td><%= inscripciones[i].pais %> </td>
-                </tr>
-            <% } %> 
-          </table>
-      </div>
+        <% if(inscripciones.length == 0 ){ %> 
+            <h4 class="animate__animated animate__fadeInLeft animate__slow">Todavia no se inscribio nadie en esta prueba, querés ser el primer@? <a href="/concurso/<%= concurso.id %>/<%= prueba.id %>/inscripcion">Ingresá acá</a> </h4>
+        <% } else {%>
+        <div class="tableContainer">
+            <table>
+              <tr>
+                  <th>Numero</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Caballo</th>
+                  <th>Categoria</th>
+                  <th>Club</th>
+                  <th>Pais</th>
+  
+              </tr>
+              <% for(let i = 0 ; i < inscripciones.length ; i ++) {%> 
+                  <tr>
+                      <td><%= i + 1 %> </td>
+                      <td><%= inscripciones[i].nombre %> </td>
+                      <td><%= inscripciones[i].apellido %> </td>
+                      <td><%= inscripciones[i].caballo %> </td>
+                      <td><%= inscripciones[i].Categoria.nombre %> </td>
+                      <td><%= inscripciones[i].club.toUpperCase() %> </td>
+                      <td><%= inscripciones[i].pais %> </td>
+                  </tr>
+              <% } %> 
+            </table>
+        </div>
+      <% } %>  
     </div>
       <%- include('./partials/scripts') %>
       </body>

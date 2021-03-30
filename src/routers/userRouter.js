@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const hasAccess = require('../middlewares/hasAccess')
 
 router.get('/login', userController.login);
 router.post('/login', userController.enter);
@@ -13,7 +14,9 @@ router.get('/:idUser/account', userController.account);
 router.get('/:idUser/edit', userController.accountEdit);
 router.put('/:idUser/edit', userController.update);
 
-router.get('/:idUser/inscripciones', userController.inscripciones)
+router.get('/:idUser/inscripciones', hasAccess, userController.inscripciones);
+
+router.get('/:idUser/:idInscripcion/inscripciones/eliminar', userController.iDestroy);
 
 router.get('/logout', userController.logout);
 module.exports = router 

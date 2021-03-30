@@ -52,8 +52,8 @@ module.exports = {
         let categoria = await db.Categoria.findAll()
         return res.render('formInscripcion', {usuario , categoria, paises, prueba, concurso});
     }, 
-    pDetail: function(req, res){
-        db.Inscripcion.findAll({
+    pDetail: async function(req, res){
+        let inscripcionesTodas = await db.Inscripcion.findAll({
             include: [
                 {
                     association: 'Prueba',
@@ -72,13 +72,19 @@ module.exports = {
                 }
             ]
         })
-        .then((inscripciones) => {
-            // return res.send(inscripciones)
-            res.render('detallePrueba', {inscripciones})
-        })
-        .catch((e) => {
-            res.send(e)
-        })
+        let prueba = await db.Prueba.findByPk(req.params.idPrueba)
+        let concurso = await db.Concurso.findByPk(req.params.idConcurso, {include: [{association:'Hipico'}]})
+        let inscripciones = []
+        for(let i = 0 ; i < inscripcionesTodas.length ; i ++){
+            if(inscripcionesTodas[i].estado == 2){
+                inscripciones.push(inscripcionesTodas[i])
+                console.log('entro en el segundo for')
+                return res.render('detallePrueba', {inscripciones, prueba, concurso})
+                } else {
+                    return res.render('detallePrueba', {inscripciones, prueba, concurso})
+                }
+            }    
+        
     },
     iCreate: async function(req, res){
         let inscripcion = await db.Inscripcion.create({
