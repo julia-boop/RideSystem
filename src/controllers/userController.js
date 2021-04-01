@@ -95,7 +95,6 @@ module.exports = {
                 if(inscripciones[i].estado == 1){
                     iFilter.push(inscripciones[i])
                     arrTotalParcial.push(inscripciones[i].Prueba.precio)
-                  
                 }
             }
             for(let j = 0 ; j < arrTotalParcial.length ; j ++){
