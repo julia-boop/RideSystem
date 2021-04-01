@@ -46,7 +46,7 @@ module.exports = {
                 })
             }
             
-        let prueba = await db.Prueba.findByPk(req.params.idPrueba)
+        let prueba = await db.Prueba.findByPk(req.params.idPrueba, {include:[{association:'Categoria'}]})
         let concurso = await db.Concurso.findByPk(req.params.idConcurso)
         let usuario = await db.Usuario.findByPk(req.session.userSession)
         let categoria = await db.Categoria.findAll()
@@ -102,6 +102,7 @@ module.exports = {
             usuario_id: req.session.userSession,
             prueba_id: req.params.idPrueba
         })
+        
         return res.redirect(`/concurso/${req.params.idConcurso}/${req.params.idPrueba}/detail`)
     }
 }

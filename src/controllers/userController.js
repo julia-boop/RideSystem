@@ -128,5 +128,35 @@ module.exports = {
         .catch(function(e){
             res.send(e)
         })
+    }, 
+    testPay: async (req, res) => {
+        let inscripciones = await db.Inscripcion.findAll( {
+            include:[{association: 'Prueba'}], 
+            where: {
+                usuario_id: req.params.idUser,
+                estado: 1
+            }
+        })
+        let anotadosCalc = []
+        let prueba = []
+        let iUpdate = []
+        for(let i = 0 ; i < inscripciones.length ; i++ ){
+            anotadosCalc.push(Number(inscripciones[i].Prueba.anotados+1));
+            prueba = await db.Prueba.update({
+                anotados: anotadosCalc[i]
+            }, {
+                where: {
+                    id: inscripciones[i].prueba_id
+                }
+            })
+            iUpdate = db.Inscripcion.update({
+                estado: 2
+            }, {
+                where: {
+                    id: inscripciones[i].id
+                }
+            })
+        }
+        return res.redirect('/user/'+inscripciones[0].usuario_id+'/inscripciones')
     }
 }

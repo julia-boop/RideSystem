@@ -18,5 +18,7 @@ router.get('/:idUser/inscripciones', hasAccess, userController.inscripciones);
 
 router.get('/:idUser/:idInscripcion/inscripciones/eliminar', userController.iDestroy);
 
+router.get('/:idUser/inscripciones/pagar', userController.testPay);
+
 router.get('/logout', userController.logout);
 module.exports = router 

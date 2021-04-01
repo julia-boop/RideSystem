@@ -4,19 +4,24 @@
 <body>
     <%- include('./partials/header') %> 
       <div class="infoConcurso animate__animated animate__zoomIn animate__slow">
-        <img src="/images/uploads/<%= concurso.Hipico.logo %> " alt="">
+        <img src="/images/uploads/<%= concurso.Hipico.logo %>" alt="">
         <h1><%= concurso.nombre %> </h1>
         <h2><%= concurso.Hipico.nombre %> </h2>
         <h3><%= concurso.fecha %> </h3>
         <h4><a href="<%= concurso.anteprograma %>">Mira el anteprograma!</a></h4>
       </div>
       <div class="pruebasContainer">
+          <% if(concurso.estado == 3 ){ %> 
+            <h3 style="color: red;">Las inscripciones de este concurso ya cerraron</h3>
+          <% } %>
           <h3>Pruebas</h3>
           <h5 class="slide"><i class="fas fa-arrow-right"></i> ¡Desliza para inscribirte y ver el detalle de la prueba!</h5>
           <div class="tableContainer">
                 <table>
                     <tr>
+                        <% if(concurso.estado != 3) {%> 
                         <th></th>
+                        <% } %>                         
                         <th></th>
                         <th>Nombre</th>
                         <th>Dia</th>
@@ -32,7 +37,9 @@
                     </tr>
                     <% for(let i = 0 ; i < concurso.Prueba.length ; i ++) {%> 
                         <tr>
-                            <td><a href="/concurso/<%= concurso.id %>/<%= concurso.Prueba[i].id %>/inscripcion">Inscribirme</a></td>
+                            <% if(concurso.estado != 3) {%>
+                                <td><a href="/concurso/<%= concurso.id %>/<%= concurso.Prueba[i].id %>/inscripcion">Inscribirme</a></td>                            
+                            <% } %>                              
                             <td><a href="/concurso/<%= concurso.id %>/<%= concurso.Prueba[i].id %>/detail">Detalle</a></td>
                             <td><%= concurso.Prueba[i].nombre %></td>
                             <td><%= concurso.Prueba[i].dia %></td>
