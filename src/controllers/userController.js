@@ -139,10 +139,11 @@ module.exports = {
         let anotadosCalc = []
         let prueba = []
         let iUpdate = []
+
         for(let i = 0 ; i < inscripciones.length ; i++ ){
             anotadosCalc.push(Number(inscripciones[i].Prueba.anotados+1));
             prueba = await db.Prueba.update({
-                anotados: anotadosCalc[i]
+                anotados: anotadosCalc[i],
             }, {
                 where: {
                     id: inscripciones[i].prueba_id
