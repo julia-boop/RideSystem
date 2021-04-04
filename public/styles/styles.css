@@ -656,9 +656,6 @@ svg:focus{
         width: 80%;
     }
 
-    /* .infoConcurso h1{
-        margin-top: 100px;
-    } */
 
     .pruebaTitle{
         margin-top: 70px;
@@ -670,6 +667,10 @@ svg:focus{
 
     .concursosContainer div{
         width: 55%;
+    }
+
+    .fin{
+        opacity: 0.3;
     }
 
     .concursosContainer div h1, h2, h3, a{

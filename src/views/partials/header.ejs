@@ -53,26 +53,29 @@
         <nav class="nav">
         <ul>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/concurso">Concursos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/user/login">Iniciar Sesion</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/user/register">Registrarse</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/contacto">Contacto/FAQs</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/user/2/account">Cuenta</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/user/3/inscripciones">Pagar inscripciones</a>
-          </li>
+          <% if(typeof(userLoggedIn) != 'undefined'){ %> 
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/user/<%= userLoggedIn.id %>/account">Cuenta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/user/<%= userLoggedIn.id %>/inscripciones">Pagar inscripciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/user/logout">Cerrar Sesión</a>
+            </li>
+          <% } else { %> 
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/user/login">Iniciar Sesion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/user/register">Registrarse</a>
+            </li>
+          <% } %> 
         </ul>
         </nav>
     </aside>

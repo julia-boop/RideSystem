@@ -21,6 +21,9 @@ module.exports = {
                 },
                 {
                     association: 'Prueba',
+                    order: [
+                        ['numero', 'ASC']
+                    ],
                     include: [{association: 'Categoria'}]
                 }
             ]
@@ -75,15 +78,18 @@ module.exports = {
         let prueba = await db.Prueba.findByPk(req.params.idPrueba)
         let concurso = await db.Concurso.findByPk(req.params.idConcurso, {include: [{association:'Hipico'}]})
         let inscripciones = []
-        for(let i = 0 ; i < inscripcionesTodas.length ; i ++){
-            if(inscripcionesTodas[i].estado == 2){
-                inscripciones.push(inscripcionesTodas[i])
-                console.log('entro en el segundo for')
-                return res.render('detallePrueba', {inscripciones, prueba, concurso})
-                } else {
+        if(inscripcionesTodas.length != 0){
+            for(let i = 0 ; i < inscripcionesTodas.length ; i ++){
+                if(inscripcionesTodas[i].estado == 2){
+                    inscripciones.push(inscripcionesTodas[i])
                     return res.render('detallePrueba', {inscripciones, prueba, concurso})
-                }
-            }    
+                    } else {
+                        return res.render('detallePrueba', {inscripciones, prueba, concurso})
+                    }
+                }    
+        } else {
+            return res.render('detallePrueba', {inscripciones, prueba, concurso})
+        } 
         
     },
     iCreate: async function(req, res){
