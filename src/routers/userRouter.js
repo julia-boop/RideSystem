@@ -14,7 +14,7 @@ router.get('/:idUser/account', userController.account);
 router.get('/:idUser/edit', userController.accountEdit);
 router.put('/:idUser/edit', userController.update);
 
-router.get('/:idUser/inscripciones', hasAccess, userController.inscripciones);
+router.get('/:idUser/inscripciones', userController.inscripciones);
 
 router.get('/:idUser/:idInscripcion/inscripciones/eliminar', userController.iDestroy);
 

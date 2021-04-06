@@ -1,5 +1,6 @@
 const db = require('../database/models');
 const bcrypt = require('bcryptjs');
+const { Op } = require("sequelize");
 
 
 module.exports = {
@@ -82,34 +83,116 @@ module.exports = {
             res.send(e)
         })
     },
-    inscripciones: function(req, res){
-        console.log(req.session)
-        db.Inscripcion.findAll({
+    inscripciones: async function(req, res){
+        let reducer = (a, b) => {
+            return a + b
+        }
+
+        let inscripciones = await db.Inscripcion.findAll({
             include:[{association: 'Usuario', where: {id: req.session.userSession}}, {association: 'Prueba', include: [{association:'Concurso', include: [{association:'Hipico'}]}]}]    
         })
-        .then((inscripciones) => {
-            let iFilter = []
-            let arrTotalParcial = []
-            let totalParcial = 0 
-            for(let i = 0 ; i < inscripciones.length ; i ++){
-                if(inscripciones[i].estado == 1){
-                    iFilter.push(inscripciones[i])
-                    arrTotalParcial.push(inscripciones[i].Prueba.precio)
+        let hipico = await db.Hipico.findAll({
+            include:[{association:'Concurso',
+                include:[{association:'Prueba',
+                where:{
+                    estado:1
+                },
+                    include:[{association:'Inscripcion',
+                    where:{
+                        estado: 1,
+                        usuario_id: req.params.idUser,
+                    }
+                }]}]}]
+                
+        })
+
+            let prueXConc = 0
+            let prue = []
+            let ins = []
+            let prueCant = []
+            let pruebasXHipico = []
+            let insXHipico = []
+            let insCantXHipico = []
+
+            for(let i = 0 ; i < hipico.length ; i ++){
+                for(let j = 0 ; j < hipico[i].Concurso.length ; j ++){
+                    prueXConc+=hipico[i].Concurso[j].Prueba.length
+                    for(let k = 0 ; k < hipico[i].Concurso[j].Prueba.length ; k++){
+                        ins.push(Number(hipico[i].Concurso[j].Prueba[k].precio)) 
+                        prue.push(Number(hipico[i].Concurso[j].Prueba[k].Inscripcion.length))
+                    }
+                }
+                pruebasXHipico.push(prueXConc)
+                prueXConc = 0
+                insXHipico.push(ins.splice(0, pruebasXHipico[i]))
+                insCantXHipico.push(prue.splice(0, pruebasXHipico[i]))
+            }
+
+            for(let i = 0 ; i < insXHipico.length ; i ++){
+                for(let j = 0 ; j < insXHipico[i].length ; j ++){
+                    insXHipico[i][j] = Number(insXHipico[i][j]*insCantXHipico[i][j])
                 }
             }
-            for(let j = 0 ; j < arrTotalParcial.length ; j ++){
-                totalParcial += arrTotalParcial[j]
+
+            let totalFinal = []
+            for(let i = 0 ; i < insXHipico.length ; i ++){
+                totalFinal.push(insXHipico[i].reduce(reducer))
             }
-            console.log(totalParcial)
-            let serviciosCalc = Number((totalParcial/100)*10)
-            let servicios = Number(serviciosCalc.toFixed(0))
-            let total = Number(totalParcial + servicios)
+
+            let comision = []
+            let totalCom = []
+            for(let i = 0 ; i < totalFinal.length ; i++){
+                comision.push(Number(totalFinal[i]*0.1).toFixed(0))
+                comision = comision.map(Number)
+                totalCom.push(Number(comision[i]+totalFinal[i]))
+            }
+
+            
+            
+            console.log(insCantXHipico)
+            console.log(pruebasXHipico)
+            console.log(insXHipico)
+            console.log(prue)
+            console.log(comision)
+            console.log(totalCom)
+
+            return res.render('carrito', {hipico, totalFinal, comision, totalCom})
+            return res.send(hipico)
+
+            return res.send(concDef)
+
+
+
+
+
+//POR SI NO ANDA LO NUEVO
+            // for(let i = 0 ; i < inscripciones.length ; i ++){
+            //     if(inscripciones[i].estado == 1){
+            //         iFilter.push(inscripciones[i])
+            //         arrTotalParcial.push(inscripciones[i].Prueba.precio)
+            //     }
+            // }
+    
+            //     for(let i = 0 ; i < iFilter.length ; i ++){
+            //         for (let j = 0 ; j < iFilter[i].Prueba.length ; j ++){
+            //             for(let h = 0 ; h < iFilter[i].Prueba[j].Concurso.length ; h++){
+            //             }
+            //         }
+            //     }
+            // }
+
+
+            // for(let j = 0 ; j < arrTotalParcial.length ; j ++){
+            //     totalParcial += arrTotalParcial[j]
+            // }
+
+
+
+            // let serviciosCalc = Number((totalParcial/100)*10)
+            // let servicios = Number(serviciosCalc.toFixed(0))
+            // let total = Number(totalParcial + servicios)
+
             // return res.send(iFilter)
-            return res.render('misInscripciones', {iFilter, totalParcial, servicios, total})
-        })
-        .catch((e) => {
-            res.send(e)
-        })
     },
     logout: function(req, res){
         req.session.destroy()

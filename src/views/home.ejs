@@ -12,12 +12,12 @@
 	<h1 class="pruebaTitle animate__animated animate__fadeInDown animate__slow">Próximos concursos...</h1>
 	<div class="concursosContainer row">
 		<% for(let i = 0 ; i < 5 ; i++){ %> 
-			<div class="<%=(concurso[i].estado == 1) ? '' : 'fin'%>">
+			<div class="<%=(concurso[i].estado == 2) ? 'fin' : ''%>">
 				<img src="/images/uploads/<%= concurso[i].Hipico.logo %> " alt="">
 				<h1 style="text-align: center;"><%= concurso[i].Hipico.nombre %> </h1>
 				<h2><%= concurso[i].nombre %> </h2>
 				<h3><%= concurso[i].fecha %> </h3>
-				<% if(concurso[i].estado == 1) {%>        
+				<% if(concurso[i].estado != 2) {%>        
 					<a href="/concurso/<%= concurso[i].id %>/detail">Mirar las pruebas disponibles</a>            
 				<% } else { %>  
 					<a href="">Este concurso ya fue finalizado</a>   
