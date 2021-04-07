@@ -9,14 +9,44 @@
           <form action="/user/register" method="POST">
               <label for="nombre">Nombre</label>
               <input type="text" name="nombre">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'nombre') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+
               <label for="apellido">Apellido</label>
               <input type="text" name="apellido">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'apellido') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+
               <label for="telefono">Telefono</label>
               <input type="tel" name="telefono">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'telefono') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+              
               <label for="email">Email</label>
               <input type="email" name="email" id="">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'email') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+              
               <label for="contrasena">Contraseña</label>
               <input type="password" name="contrasena">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'contrasena') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+              
               <p>¿Ya tenes cuenta? <a href="/user/login">Inicia sesión acá</a></p> 
               <button type="submit">Registrame :)</button>
           </form>

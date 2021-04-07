@@ -8,10 +8,28 @@
           <form action="/concurso/<%= concurso.id %>/<%= prueba.id %>/inscripcion" method="POST" >
               <label for="name">Nombre</label>
               <input type="text" name="nombre" >
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'nombre') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+
               <label for="surname">Apellido</label>
               <input type="text" name="apellido" >
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'apellido') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+
               <label for="horse">Caballo</label>
               <input type="text" name="caballo">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'caballo') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+
               <label for="program">Categoria</label>
                 <select name="categoria" id="">
                     <option value=""></option>
@@ -19,9 +37,21 @@
                     <option value="<%= prueba.Categoria[i].id %>"><%= prueba.Categoria[i].nombre %> </option>
                     <% } %> 
                 </select>
+                <% if(typeof(errors) != 'undefined') {%> 
+                    <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                      <small style="color: red;" ><%= (errors[i].param == 'categoria') ? errors[i].msg : ''%> </small>
+                    <% } %> 
+                <% } %> 
+
               <label for="hipico">Club Hipico</label>
               <p>*Por favor escribir unicamente las siglas</p>
               <input type="text" name="club" id="">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'club') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
+
                 <label for="country">Pais</label>
                 <select name="pais" id="">
                     <option value=""></option>
@@ -29,6 +59,11 @@
                     <option value="<%= paises[i].siglas %>"><%= paises[i].nombre %> </option>
                     <% } %> 
                 </select>
+                <% if(typeof(errors) != 'undefined') {%> 
+                    <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                      <small style="color: red;" ><%= (errors[i].param == 'pais') ? errors[i].msg : ''%> </small>
+                    <% } %> 
+                  <% } %> 
                 <p>*Las inscripciones solo se realizan despues de efectuar el pago. Para hacerlo, hace click en "Pagar inscripciones", luego de llenar el formulario</p>
               <button type="submit">Inscribirme</button>
           </form>

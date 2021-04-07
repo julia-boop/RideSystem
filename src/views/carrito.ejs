@@ -3,9 +3,10 @@
     <%- include('./partials/head') %> 
 <body>
     <%- include('./partials/header') %> 
-        <!-- <h1 class="pruebaTitle animate__animated animate__fadeInDown animate__slow" style="margin-bottom: 40px
-        ;">No hay inscripciones para pagar</h1> -->
-
+    <% if(hipico.length == 0 || totalFinal[0] == 0) {%> 
+        <h1 class="pruebaTitle animate__animated animate__fadeInDown animate__slow" style="margin-bottom: 40px
+        ;">No hay inscripciones para pagar</h1>
+    <% } else {%> 
         <h1 class="pruebaTitle animate__animated animate__fadeInDown animate__slow" style="margin-bottom: 40px
         ;">Inscripciones a pagar</h1>
 <div class="payContainer">
@@ -33,6 +34,8 @@
     <button><a href="/user/<%= userLoggedIn.id %>/inscripciones/pagar">Pagar</a></button>
     </div>
     <% } %>  
+    <% } %>  
+
     </div>      
     <%- include('./partials/scripts') %>
     </body>

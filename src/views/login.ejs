@@ -11,6 +11,8 @@
               <input type="email" name="email" id="">
               <label for="contrasena">Contraseña</label>
               <input type="password" name="contrasena">
+              <small style="color: red;" ><%= (typeof(errors) != 'undefined') ? errors[0].msg : ''%> </small>
+              
               <p>¿Todavía no tenes cuenta? <a href="/user/register">Registrate acá</a></p> 
               <button type="submit">Iniciar Sesion</button>
           </form>
