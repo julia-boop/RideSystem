@@ -78,23 +78,35 @@ module.exports = {
         })
     },
     update: function(req, res){
-        db.Usuario.update({
-            email: req.body.email,
-            rol: 1,
-            nombre: req.body.nombre,
-            apellido: req.body.apellido,
-            telefono: req.body.telefono,
-        }, {
-            where: {
-                id: req.params.idUser
-            }
-        })
-        .then(function(usuario){
-            res.redirect('/user/' + req.params.idUser + '/account')
-        })
-        .catch(function(e){
-            res.send(e)
-        })
+        let errors = validationResult(req)
+        if(errors.isEmpty()){
+            db.Usuario.update({
+                email: req.body.email,
+                rol: 1,
+                nombre: req.body.nombre,
+                apellido: req.body.apellido,
+                telefono: req.body.telefono,
+            }, {
+                where: {
+                    id: req.params.idUser
+                }
+            })
+            .then(function(usuario){
+                res.redirect('/user/' + req.params.idUser + '/account')
+            })
+            .catch(function(e){
+                res.send(e)
+            })
+        } else {
+            db.Usuario.findByPk(req.params.idUser)
+            .then(function(usuario){
+                res.render('accountEdit', {errors:errors.errors, usuario})
+            })
+            .catch(function(e){
+                res.send(e)
+            })
+        }
+        
     },
     inscripciones: async function(req, res){
         let reducer = (a, b) => {
@@ -105,8 +117,6 @@ module.exports = {
             where:{estado:1},
             include:[{association: 'Usuario', where: {id: req.session.userSession}}, {association: 'Prueba', include: [{association:'Concurso', include: [{association:'Hipico'}]}]}]    
         })
-        
-
         if(inscripciones.length != 0){
             console.log('entro aca ')
             let hipico = await db.Hipico.findAll({

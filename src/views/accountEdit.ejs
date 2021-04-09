@@ -8,12 +8,32 @@
           <form action="/user/<%= usuario.id %>/edit?_method=put" method="POST" >
               <label for="name">Nombre</label>
               <input type="text" value="<%= usuario.nombre %> " name="nombre">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'nombre') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
               <label for="surname">Apellido</label>
               <input type="text" name="apellido" value="<%= usuario.apellido %> ">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'apellido') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
               <label for="email">Email</label>
               <input type="email" name="email" value="<%= usuario.email %> ">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'email') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
               <label for="phone">Telefono</label>
               <input type="tel" name="telefono" value="<%= usuario.telefono %> ">
+              <% if(typeof(errors) != 'undefined') {%> 
+                <% for(let i = 0 ; i < errors.length ; i ++) {%> 
+                  <small style="color: red;" ><%= (errors[i].param == 'telefono') ? errors[i].msg : ''%> </small>
+                <% } %> 
+              <% } %> 
               <button type="submit">Editar Datos</button>
           </form>
       </div>

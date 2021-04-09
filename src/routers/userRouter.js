@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const hasAccess = require('../middlewares/hasAccess')
 const loginValidation = require('../validations/loginValidation');
 const registerValidation = require('../validations/registerValidation');
+const cuentaValidation = require('../validations/cuentaValidation');
 
 
 
@@ -16,7 +17,7 @@ router.post('/register', registerValidation, userController.saveUser);
 router.get('/:idUser/account', hasAccess, userController.account);
 
 router.get('/:idUser/edit', hasAccess, userController.accountEdit);
-router.put('/:idUser/edit', userController.update);
+router.put('/:idUser/edit', cuentaValidation, userController.update);
 
 router.get('/:idUser/inscripciones', hasAccess, userController.inscripciones);
 
